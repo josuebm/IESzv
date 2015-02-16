@@ -1,0 +1,235 @@
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools" android:layout_width="match_parent"
+    android:layout_height="match_parent" tools:context="com.example.josu.ieszv.FragmentoAnadir">
+
+    <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:paddingLeft="@dimen/activity_horizontal_margin"
+        android:paddingRight="@dimen/activity_horizontal_margin"
+        android:paddingTop="@dimen/activity_vertical_margin"
+        android:paddingBottom="@dimen/activity_vertical_margin"
+        tools:context="com.example.josu.ieszv.Anadir">
+
+        <LinearLayout
+            android:orientation="horizontal"
+            android:id="@+id/linearTipo"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:text="Tipo:"
+                android:id="@+id/tvTipo"
+                android:layout_weight="1" />
+
+            <Spinner
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/spTipo"
+                android:layout_weight="1" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:orientation="horizontal"
+            android:id="@+id/linearProfesor"
+            android:layout_below="@id/linearTipo"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:text="Profesor:"
+                android:id="@+id/tvProfesor"
+                android:layout_weight="1" />
+
+            <Spinner
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/spProfesor"
+                android:layout_weight="1" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:orientation="horizontal"
+            android:id="@+id/linearGrupo"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/linearProfesor">
+
+            <TextView
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:text="Grupo:"
+                android:id="@+id/tvGrupo"
+                android:layout_weight="1" />
+
+            <Spinner
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/spGrupo"
+                android:layout_weight="1" />
+        </LinearLayout>
+
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:inputType="textMultiLine"
+            android:ems="10"
+            android:id="@+id/tvDescripcion"
+            android:layout_below="@+id/linearGrupo"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
+            android:hint="Descripción"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentEnd="true"
+            android:gravity="top"
+            android:minLines="3"
+            android:maxLines="3" />
+
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_below="@id/tvDescripcion"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/linearLayout">
+
+            <LinearLayout
+                android:orientation="horizontal"
+                android:id="@+id/linear"
+                android:layout_below="@id/tvProfesor"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content">
+
+                <TextView
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:text="hh:mm"
+                    android:id="@+id/tvHoraInicio"
+                    android:layout_below="@+id/tvProfesor"
+                    android:layout_alignParentLeft="true"
+                    android:layout_alignParentStart="true"
+                    android:layout_weight="1"
+                    android:layout_gravity="center_vertical" />
+
+                <ImageButton
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/ibHoraInicio"
+                    android:layout_toEndOf="@+id/tvHoraInicio"
+                    android:src="@drawable/ic_action_time"
+                    android:layout_below="@+id/tvProfesor"
+                    android:layout_toRightOf="@+id/tvHoraInicio"
+                    android:onClick="hora"
+                    android:layout_weight="1" />
+
+                <TextView
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:text="aaaa-mm-dd"
+                    android:id="@+id/tvFechaInicio"
+                    android:layout_below="@+id/ibHoraInicio"
+                    android:layout_alignParentLeft="true"
+                    android:layout_alignParentStart="true"
+                    android:layout_weight="1"
+                    android:onClick="fecha"
+                    android:layout_gravity="center_vertical" />
+
+                <ImageButton
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/ibFechaInicio"
+                    android:layout_toEndOf="@+id/tvHoraInicio"
+                    android:src="@drawable/ic_action_go_to_today"
+                    android:layout_below="@+id/ibHoraInicio"
+                    android:layout_toRightOf="@+id/tvFechaInicio"
+                    android:onClick="fecha"
+                    android:layout_weight="1" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:orientation="horizontal"
+                android:layout_below="@id/linear"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content">
+
+                <TextView
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:text="hh:mm"
+                    android:id="@+id/tvHoraFin"
+                    android:layout_below="@+id/tvProfesor"
+                    android:layout_toRightOf="@+id/ibHoraInicio"
+                    android:layout_toEndOf="@+id/ibHoraInicio"
+                    android:layout_weight="1"
+                    android:layout_gravity="center_vertical" />
+
+                <ImageButton
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/ibHoraFin"
+                    android:layout_toEndOf="@+id/tvHoraFin"
+                    android:src="@drawable/ic_action_time"
+                    android:layout_below="@+id/tvProfesor"
+                    android:layout_toRightOf="@+id/tvHoraFin"
+                    android:onClick="hora2"
+                    android:layout_weight="1" />
+
+                <TextView
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:text="aaaa-mm-dd"
+                    android:id="@+id/tvFechaFin"
+                    android:layout_below="@+id/ibHoraInicio"
+                    android:layout_alignParentLeft="true"
+                    android:layout_alignParentStart="true"
+                    android:layout_weight="1"
+                    android:layout_gravity="center_vertical"
+                    android:onClick="fecha2" />
+
+                <ImageButton
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/ibFechaFin"
+                    android:layout_toEndOf="@+id/tvHoraInicio"
+                    android:src="@drawable/ic_action_go_to_today"
+                    android:layout_below="@+id/ibHoraInicio"
+                    android:layout_toRightOf="@+id/tvFechaInicio"
+                    android:onClick="fecha2"
+                    android:layout_weight="1" />
+            </LinearLayout>
+        </LinearLayout>
+
+        <EditText
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/tvLugarInicio"
+            android:layout_below="@+id/linearLayout"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
+            android:hint="Lugar de salida" />
+
+        <EditText
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/tvLugarFin"
+            android:layout_below="@+id/tvLugarInicio"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
+            android:hint="Lugar de llegada" />
+
+    </RelativeLayout>
+
+
+</FrameLayout>
