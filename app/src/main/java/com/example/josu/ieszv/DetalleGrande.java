@@ -37,23 +37,16 @@ public class DetalleGrande extends Activity {
         ActividadDetalle actividadDetalle = (ActividadDetalle)getIntent().getExtras().get("actividad");
 
         iv.setImageResource(R.drawable.logo_grande);
-        tvGrupo.setText(Html.fromHtml(("<b>Grupo:</b> ") + actividadDetalle.getGrupo()));
-        tvFechaI.setText(Html.fromHtml(("<b>Desde:</b> ") + actividadDetalle.getFechaI()));
-        tvFechaF.setText(Html.fromHtml(("<b>Hasta:</b> ") + actividadDetalle.getFechaF()));
-        tvTipo.setText(Html.fromHtml(("<b>Tipo de actividad:</b> ") + actividadDetalle.getTipo()));
-        tvProfesor.setText(Html.fromHtml(("<b>Profesor:</b> ") + actividadDetalle.getProfesor()));
-        tvDescripcion.setText(Html.fromHtml(("<b>Descripción:</b>") + "<br />" + actividadDetalle.getDescripcion()));
-        tvLugarI.setText(Html.fromHtml(("<b>Lugar de salida:</b> ") + actividadDetalle.getLugarI()));
-        tvLugarF.setText(Html.fromHtml(("<b>Lugar de llegada:</b> ") + actividadDetalle.getLugarF()));
+        tvGrupo.setText(Html.fromHtml("<b>" + getResources().getString(R.string.tvGrupo) + "</b> " + actividadDetalle.getGrupo()));
+        tvFechaI.setText(Html.fromHtml(("<b>" + getResources().getString(R.string.tvFechaI) + "</b> ") + actividadDetalle.getFechaI()));
+        tvFechaF.setText(Html.fromHtml(("<b>" + getResources().getString(R.string.tvFechaF) + "</b> ") + actividadDetalle.getFechaF()));
+        tvTipo.setText(Html.fromHtml(("<b>" + getResources().getString(R.string.tvTipo) + "</b> ") + actividadDetalle.getTipo()));
+        tvProfesor.setText(Html.fromHtml(("<b>" + getResources().getString(R.string.tvProfesor) + "</b> ") + actividadDetalle.getProfesor()));
+        tvDescripcion.setText(Html.fromHtml(("<b>" + getResources().getString(R.string.tvDescripcion) + "</b>") + "<br />" + actividadDetalle.getDescripcion()));
+        tvLugarI.setText(Html.fromHtml(("<b>" + getResources().getString(R.string.tvLugarI) + "</b> ") + actividadDetalle.getLugarI()));
+        tvLugarF.setText(Html.fromHtml(("<b>" + getResources().getString(R.string.tvLugarF) + "</b> ") + actividadDetalle.getLugarF()));
     }
 
-
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.menu_detalle_grande, menu);
-        return true;
-    }
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {

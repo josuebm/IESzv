@@ -37,13 +37,9 @@ public class Anadir extends Activity {
     private TextView tvProfesor, tvGrupo, tvDescripcion, tvLugarInicio, tvLugarFin;
     private Spinner spProfesor, spGrupo, spTipo;
     private ImageButton ibHoraInicio, ibHoraFin, ibFechaInicio, ibFechaFin;
-    //private ArrayList<Actividad> actividades;
     private ArrayList<Profesor> profesores;
     private ArrayList<Grupo> grupos;
-    //private ArrayList<ActividadGrupo> actividadGrupos;
     private final static String URL_BASE = "http://ieszv.x10.bz/restful/api/";
-    private static int ANADIR = 2;
-    private static int EDITAR = 3;
     private String accion;
     private ActividadDetalle actividadEditando;
 
@@ -55,10 +51,8 @@ public class Anadir extends Activity {
             setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE);
         else
             setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
-        //actividades = (ArrayList<Actividad>) getIntent().getExtras().get("actividades");
         profesores = (ArrayList<Profesor>) getIntent().getExtras().get("profesores");
         grupos = (ArrayList<Grupo>) getIntent().getExtras().get("grupos");
-        //actividadGrupos = (ArrayList<ActividadGrupo>) getIntent().getExtras().get("actividadgrupos");
         tvHora = (TextView) findViewById(R.id.tvHoraInicio);
         tvHora2 = (TextView) findViewById(R.id.tvHoraFin);
         tvFecha = (TextView) findViewById(R.id.tvFechaInicio);
@@ -160,19 +154,14 @@ public class Anadir extends Activity {
 
         } else if (spTipo.getSelectedItem().toString().equals("Extraescolar") && !tvDescripcion.getText().toString().isEmpty() && !tvHora.getText().equals("hh:mm") && !tvHora2.getText().equals("hh:mm") && !tvFecha.getText().equals("aaaa-mm-dd") && !tvFecha2.getText().equals("aaaa-mm-dd") && !tvLugarInicio.getText().toString().isEmpty() && !tvLugarFin.getText().toString().isEmpty()) {
             Actividad actividad = new Actividad(idProfe, "extraescolar", tvFecha.getText().toString() + " " + tvHora.getText().toString() + ":00", tvFecha2.getText().toString() + " " + tvHora2.getText().toString() + ":00", tvLugarInicio.getText().toString(), tvLugarFin.getText().toString(), tvDescripcion.getText().toString(), "Josue");
-            //tostada(actividad.toString());
-            Log.v("NUEVA ACTIVIDAD", actividad.toString());
             JSONObject object = actividad.getJSON();
-            //tostada(object.toString());
-            Log.v("NUEVO JSON", object.toString());
             ParametrosPost parametrosPost = new ParametrosPost();
             parametrosPost.url = URL_BASE + "actividad";
             parametrosPost.json = object;
-            Log.v("NUEVA JSON PP", parametrosPost.json.toString());
             PostRestful post = new PostRestful();
             post.execute(parametrosPost);
         } else
-            Toast.makeText(this, "Debe rellenar todos los campos", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, getResources().getString(R.string.campos_obligatorios), Toast.LENGTH_SHORT).show();
     }
 
     public void visibleExtraordinaria() {
@@ -349,7 +338,6 @@ public class Anadir extends Activity {
         @Override
         protected String doInBackground(ParametrosPost[] params) {
             pp = params[0];
-            Log.v("NUEV PP JSON", pp.json.toString());
             String r = null;
             try {
                 r = ClienteRestFul.post(pp.url, pp.json);
@@ -385,14 +373,14 @@ public class Anadir extends Activity {
                 }
                 prGrupo.execute(pp);
                 if(accion.equals("anadir"))
-                    tostada("La actividad se ha añadido.");
+                    tostada(getResources().getString(R.string.actividad_agregada));
                 else
-                    tostada("La actividad se ha editado.");
+                    tostada(getResources().getString(R.string.actividad_editada));
                 Intent intent = new Intent(Anadir.this, Principal.class);
                 setResult(RESULT_OK, intent);
                 finish();
             } else if (respuesta.equals("0"))
-                tostada("No se ha podido añadir la actividad.");
+                tostada(getResources().getString(R.string.actividad_no_agregada));
         }
 
         public String getIdGrupo(String grupo) {
@@ -426,12 +414,6 @@ public class Anadir extends Activity {
                 respuesta = idAct.getString("r");
             } catch (JSONException e) {
                 e.printStackTrace();
-            }
-            if (!respuesta.equals("0")) {
-                //tostada("La actividad se ha eliminado.");
-                /* NO CONSIGO QUE ME CARGUE LAS ACTIVIDADES BIEN DESPUÉS DE HABER ELIMINADO UNA.
-                TAMPOCO FUNCIONA SI INICIALIZO DE NUEVO EL ARRAYLIST DE ACTIVIDADES
-                cargarActividades();*/
             }
         }
     }

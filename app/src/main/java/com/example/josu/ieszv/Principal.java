@@ -5,10 +5,8 @@ import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.ActivityInfo;
-import android.graphics.Bitmap;
 import android.os.AsyncTask;
 import android.os.Bundle;
-import android.os.Environment;
 import android.text.Html;
 import android.util.Log;
 import android.view.ContextMenu;
@@ -17,7 +15,6 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
-import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
@@ -26,9 +23,6 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 import org.json.JSONTokener;
-
-import java.io.File;
-import java.io.FileOutputStream;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collections;
@@ -36,7 +30,6 @@ import java.util.Collections;
 
 public class Principal extends Activity {
 
-    private TextView tvInicial;
     private final static String URL_BASE = "http://ieszv.x10.bz/restful/api/";
     private ListView lv;
     private Adaptador ad;
@@ -84,14 +77,14 @@ public class Principal extends Activity {
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 if (getResources().getBoolean(R.bool.tablet)){
                     ivDetalle.setImageResource(R.drawable.logo_grande);
-                    tvGrupoDetalle.setText(Html.fromHtml(("<b>Grupo:</b> ") + actividadDetalles.get(position).getGrupo()));
-                    tvFechaIDetalle.setText(Html.fromHtml(("<b>Desde:</b> ") + actividadDetalles.get(position).getFechaI()));
-                    tvFechaFDetalle.setText(Html.fromHtml(("<b>Hasta:</b> ") + actividadDetalles.get(position).getFechaF()));
-                    tvTipoDetalle.setText(Html.fromHtml(("<b>Tipo de actividad:</b> ") + actividadDetalles.get(position).getTipo()));
-                    tvProfesorDetalle.setText(Html.fromHtml(("<b>Profesor:</b> ") + actividadDetalles.get(position).getProfesor()));
-                    tvDescripcionDetalle.setText(Html.fromHtml(("<b>Descripción:</b>") + "<br />" + actividadDetalles.get(position).getDescripcion()));
-                    tvLugarIDetalle.setText(Html.fromHtml(("<b>Lugar de salida:</b> ") + actividadDetalles.get(position).getLugarI()));
-                    tvLugarFDetalle.setText(Html.fromHtml(("<b>Lugar de llegada:</b> ") + actividadDetalles.get(position).getLugarF()));
+                    tvGrupoDetalle.setText(Html.fromHtml("<b>" + getResources().getString(R.string.tvGrupo) + "</b> " + actividadDetalles.get(position).getGrupo()));
+                    tvFechaIDetalle.setText(Html.fromHtml(("<b>" + getResources().getString(R.string.tvFechaI) + "</b> ") + actividadDetalles.get(position).getFechaI()));
+                    tvFechaFDetalle.setText(Html.fromHtml(("<b>" + getResources().getString(R.string.tvFechaF) + "</b> ") + actividadDetalles.get(position).getFechaF()));
+                    tvTipoDetalle.setText(Html.fromHtml(("<b>" + getResources().getString(R.string.tvTipo) + "</b> ") + actividadDetalles.get(position).getTipo()));
+                    tvProfesorDetalle.setText(Html.fromHtml(("<b>" + getResources().getString(R.string.tvProfesor) + "</b> ") + actividadDetalles.get(position).getProfesor()));
+                    tvDescripcionDetalle.setText(Html.fromHtml(("<b>" + getResources().getString(R.string.tvDescripcion) + "</b>") + "<br />" + actividadDetalles.get(position).getDescripcion()));
+                    tvLugarIDetalle.setText(Html.fromHtml(("<b>" + getResources().getString(R.string.tvLugarI) + "</b> ") + actividadDetalles.get(position).getLugarI()));
+                    tvLugarFDetalle.setText(Html.fromHtml(("<b>" + getResources().getString(R.string.tvLugarF) + "</b> ") + actividadDetalles.get(position).getLugarF()));
                 }else{
                     Intent intent = new Intent(Principal.this, DetalleGrande.class);
                     intent.putExtra("actividad", actividadDetalles.get(position));
@@ -117,7 +110,6 @@ public class Principal extends Activity {
         if (id == R.id.action_anadir) {
             Intent intent = new Intent(this, Anadir.class);
             intent.putExtra("accion", "anadir");
-            intent.putExtra("actividades", actividades);
             intent.putExtra("profesores", profesores);
             intent.putExtra("grupos", grupos);
             startActivityForResult(intent, ANADIR);
@@ -133,10 +125,6 @@ public class Principal extends Activity {
         inflater.inflate(R.menu.principal_long_click, menu);
     }
 
-    /**
-     * TENGO QUE LANZAR UN ALERTDIALOG PARA CONFIRMAR ANTES DE ELIMINAR
-     */
-
     @Override
     public boolean onContextItemSelected(MenuItem item) {
         //return super.onContextItemSelected(item);
@@ -147,16 +135,12 @@ public class Principal extends Activity {
         Adaptador.ViewHolder vh;
         vh = (Adaptador.ViewHolder) o;
         if (id == R.id.action_eliminar) {
-            /* OBTENEMOS EL MISMO VALOR DE ESTAS DOS FORMAS
-            tostada("VIEW HOLDER: " + actividades.get(vh.position).getId());
-            tostada("INFO: " + actividades.get(index).getId());
-            */
             final TextView aviso = new TextView(this);
-            aviso.setText("¿Está seguro de que desea eliminar esta actividad?");
+            aviso.setText(getResources().getString(R.string.pregunta_eliminar));
             aviso.setTextSize(20);
             aviso.setPadding(10, 10, 10, 10);
             new AlertDialog.Builder(this)
-                    .setTitle("Eliminar actividad")
+                    .setTitle(getResources().getString(R.string.title_eliminar))
                     .setView(aviso)
                     .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
                         public void onClick(DialogInterface dialog, int which) {
@@ -304,11 +288,11 @@ public class Principal extends Activity {
                 e.printStackTrace();
             }
             if (!respuesta.equals("0")) {
-                tostada("La actividad se ha eliminado.");
+                tostada(getResources().getString(R.string.actividad_eliminada));
                 cargarActividades(todo = false);
 
             } else
-                tostada("La actividad no ha podido ser eliminada.");
+                tostada(getResources().getString(R.string.actividad_no_eliminada));
 
         }
     }

@@ -16,26 +16,28 @@
         <item>Complementaria</item>
         <item>Extraescolar</item>
     </string-array>
-    <string-array name="profesor">
-        <item>Prof. 1</item>
-        <item>Prof. 2</item>
-        <item>Prof. 3</item>
-        <item>Prof. 4</item>
-    </string-array>
-    <string-array name="departamento">
-        <item>Dpto. 1</item>
-        <item>Dpto. 2</item>
-        <item>Dpto. 3</item>
-        <item>Dpto. 4</item>
-    </string-array>
-    <string-array name="grupos">
-        <item>Grupo 1</item>
-        <item>Grupo 2</item>
-        <item>Grupo 3</item>
-        <item>Grupo 4</item>
-    </string-array>
 
     <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="tvGrupo">Grupo:</string>
+    <string name="tvFechaI">Desde:</string>
+    <string name="tvFechaF">Hasta:</string>
+    <string name="tvTipo">Tipo:</string>
+    <string name="tvProfesor">Profesor:</string>
+    <string name="tvDescripcion">Descripción:</string>
+    <string name="tvLugarI">Lugar de salida:</string>
+    <string name="tvLugarF">Lugar de llegada:</string>
+
+    <string name="pregunta_eliminar">¿Está seguro de que desea eliminar esta actividad?</string>
+    <string name="title_eliminar">Eliminar actividad</string>
+
+    <string name="actividad_eliminada">La actividad se ha eliminado.</string>
+    <string name="actividad_no_eliminada">La actividad no ha podido ser eliminada.</string>
+
+    <string name="campos_obligatorios">Debe rellenar todos los campos</string>
+
+    <string name="actividad_agregada">La actividad se ha añadido.</string>
+    <string name="actividad_editada">La actividad se ha editado.</string>
+    <string name="actividad_no_agregada">No se ha podido añadir la actividad.</string>
 
 
 </resources>

@@ -13,6 +13,6 @@
         android:id="@+id/fragment4"
         tools:layout="@layout/fragment_fragmento_anadir"
         android:layout_weight="1"
-        android:layout_marginLeft="50dp"
-        android:layout_marginRight="50dp" />
+        android:layout_marginLeft="100dp"
+        android:layout_marginRight="100dp" />
 </LinearLayout>
